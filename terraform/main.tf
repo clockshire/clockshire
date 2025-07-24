@@ -6,6 +6,15 @@ terraform {
       version = "~> 5.0"
     }
   }
+
+  # Uncomment the backend configuration after creating the S3 bucket and DynamoDB table
+  # backend "s3" {
+  #   bucket         = "436158765452-clockshire-terraform-state"
+  #   key            = "dns/terraform.tfstate"
+  #   region         = "eu-west-2"
+  #   encrypt        = true
+  #   dynamodb_table = "436158765452-clockshire-terraform-locks"
+  # }
 }
 
 provider "aws" {

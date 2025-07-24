@@ -31,3 +31,13 @@ output "dkim_records" {
     dkim3 = aws_route53_record.dkim3.fqdn
   }
 }
+
+output "terraform_state_bucket" {
+  description = "The S3 bucket used for Terraform state storage"
+  value       = aws_s3_bucket.terraform_state.bucket
+}
+
+output "terraform_locks_table" {
+  description = "The DynamoDB table used for Terraform state locking"
+  value       = aws_dynamodb_table.terraform_locks.name
+}
