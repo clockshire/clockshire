@@ -22,3 +22,12 @@ output "txt_record" {
   description = "The SPF TXT record"
   value       = aws_route53_record.txt.fqdn
 }
+
+output "dkim_records" {
+  description = "The DKIM CNAME records for email authentication"
+  value = {
+    dkim1 = aws_route53_record.dkim1.fqdn
+    dkim2 = aws_route53_record.dkim2.fqdn
+    dkim3 = aws_route53_record.dkim3.fqdn
+  }
+}

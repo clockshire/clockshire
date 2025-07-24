@@ -3,6 +3,7 @@
 # Script to import existing Route 53 DNS records into Terraform state
 
 echo "Getting hosted zone ID for clockshire.uk..."
+# shellcheck disable=SC2016
 ZONE_ID=$(aws route53 list-hosted-zones --query 'HostedZones[?Name==`clockshire.uk.`].Id' --output text | sed 's/\/hostedzone\///')
 
 if [ -z "$ZONE_ID" ]; then
@@ -27,5 +28,11 @@ terraform import aws_route53_record.spf "${ZONE_ID}_clockshire.uk_TXT"
 echo "Importing PurelyMail ownership TXT record..."
 terraform import aws_route53_record.purelymail_ownership "${ZONE_ID}_clockshire.uk_TXT"
 
+# Import DKIM records
+echo "Importing DKIM records..."
+terraform import aws_route53_record.dkim1 "${ZONE_ID}_purelymail1._domainkey.clockshire.uk_CNAME"
+terraform import aws_route53_record.dkim2 "${ZONE_ID}_purelymail2._domainkey.clockshire.uk_CNAME"
+terraform import aws_route53_record.dkim3 "${ZONE_ID}_purelymail3._domainkey.clockshire.uk_CNAME"
+
 echo ""
-echo "Import completed. Run 'terraform plan' to verify everything is in sync." 
+echo "Import completed. Run 'terraform plan' to verify everything is in sync."
