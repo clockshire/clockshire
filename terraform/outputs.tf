@@ -19,7 +19,7 @@ output "mx_record" {
 }
 
 output "txt_record" {
-  description = "The SPF TXT record"
+  description = "The TXT record (contains SPF and PurelyMail ownership)"
   value       = aws_route53_record.txt.fqdn
 }
 

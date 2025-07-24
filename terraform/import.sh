@@ -20,13 +20,9 @@ echo "Importing existing DNS records..."
 echo "Importing MX record..."
 terraform import aws_route53_record.mx "${ZONE_ID}_clockshire.uk_MX"
 
-# Import SPF TXT record
-echo "Importing SPF TXT record..."
-terraform import aws_route53_record.spf "${ZONE_ID}_clockshire.uk_TXT"
-
-# Import PurelyMail ownership TXT record
-echo "Importing PurelyMail ownership TXT record..."
-terraform import aws_route53_record.purelymail_ownership "${ZONE_ID}_clockshire.uk_TXT"
+# Import TXT record (contains both SPF and PurelyMail ownership)
+echo "Importing TXT record..."
+terraform import aws_route53_record.txt "${ZONE_ID}_clockshire.uk_TXT"
 
 # Import DKIM records
 echo "Importing DKIM records..."
